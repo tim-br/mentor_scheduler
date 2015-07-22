@@ -12,8 +12,9 @@ post '/verify_login' do
   current_admin = Admin.find_by email: admin_email
   if current_admin && current_admin.authenticate(password)
     session["admin_id"] = current_admin.id
-    puts session["admin_id"]
+    redirect '/calendar'
+  else
+    redirect '/authentification_failed'
   end
-  redirect '/calendar'
 
 end
