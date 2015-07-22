@@ -7,6 +7,7 @@ gem 'activesupport'
 gem 'sinatra'
 gem 'sinatra-contrib'
 gem 'sinatra-activerecord'
+gem 'bcrypt', '~> 3.1.7'
 
 gem 'puma'
 gem 'tux'
