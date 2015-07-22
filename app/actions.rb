@@ -1,4 +1,7 @@
-# Homepage (Root path)
-get '/' do
-  erb :index
+get '/' do 
+  erb :'index'
+end
+
+get '/calendar' do
+  erb :'/calendar/index'
 end
