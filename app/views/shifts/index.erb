@@ -1,0 +1,10 @@
+<div class = "container" style="text-align: left;">
+  <% @shifts.each do |shift| %>
+    <div class="shift">
+      <p>
+        <a href="/shifts/<%= shift.id %>"><%= shift.date   %> </a>
+        <%= shift.mentor_to_string %>
+      </p>
+    </div>
+  <% end %>
+</div>

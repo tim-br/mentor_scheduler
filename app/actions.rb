@@ -11,6 +11,13 @@ get '/mentors' do
   erb :'mentors/index'
 end
 
+get '/shifts' do
+  @shifts = Shift.all
+  erb :'shifts/index'
+end
+
+
+
 get '/calendar' do
   erb :'/calendar/index'
 end
