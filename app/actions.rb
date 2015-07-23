@@ -40,6 +40,7 @@ end
 
 post '/mentors/:id/shifts'
 
+  redirect '/mentors/:id/shifts'
 end
 
 get '/calendar' do
