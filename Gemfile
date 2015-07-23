@@ -3,6 +3,7 @@ source "https://rubygems.org"
 
 gem 'rake'
 gem 'activesupport'
+gem 'activerecord'
 
 gem 'sinatra'
 gem 'sinatra-contrib'
@@ -12,6 +13,9 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'puma'
 gem 'tux'
 gem 'pg'
+gem 'rspec'
+gem 'database_cleaner'
+gem 'sqlite3'
 
 group :development, :test do
   gem 'pry'
