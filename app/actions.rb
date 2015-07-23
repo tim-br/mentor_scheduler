@@ -2,10 +2,6 @@ def current_user
   session[:user]
 end
 
-get '/test' do 
-
-end
-
 get '/' do
   erb :'index'
 end
