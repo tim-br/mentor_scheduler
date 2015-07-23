@@ -4,5 +4,6 @@
 /db/*.sqlite3
 /db/*.sqlite
 /db/*.sqlite3-journal
+/config/database.rb
 .DS_Store
 public/assets

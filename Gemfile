@@ -11,9 +11,9 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'puma'
 gem 'tux'
+gem 'pg'
 
 group :development, :test do
   gem 'pry'
   gem 'shotgun'
-  gem 'sqlite3'
 end

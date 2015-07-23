@@ -1,3 +1,7 @@
+def current_user
+  session[:user]
+end
+
 get '/' do
   erb :'index'
 end
@@ -7,14 +11,16 @@ get '/calendar' do
 end
 
 post '/verify_login' do
-  admin_email = params[:admin_email]
-  password = params[:password]
-  current_admin = Admin.find_by email: admin_email
-  if current_admin && current_admin.authenticate(password)
-    session["admin_id"] = current_admin.id
+  @admin = Admin.find_by email: params[:admin_email]
+  if @admin && @admin.authenticate(params[:password])
+    session[:user] = @admin
     redirect '/calendar'
   else
     redirect '/authentification_failed'
   end
 
+end
+
+get '/authentification_failed' do
+  erb :'/authentification_failed'
 end
