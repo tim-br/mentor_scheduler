@@ -38,7 +38,7 @@ get '/shifts' do
   erb :'shifts/index'
 end
 
-post '/mentors/:id/shifts'
+post '/mentors/:id/shifts' do
 
   redirect '/mentors/:id/shifts'
 end
