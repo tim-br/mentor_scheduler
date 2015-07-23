@@ -3,4 +3,22 @@ class Mentor < ActiveRecord::Base
   has_many :constraints
   validates :full_name, presence: true
   validates :email, presence: true, uniqueness: true
+
+  #returns active record relation
+  def shifts_on(date)
+    Shift.where date: date
+    # a = []
+    # s.each {|row| a<<row.date}
+  end
+
+  def total_hours_on(date)
+    shifts_for_date(date).count
+  end
+
+  def hours_on(date)
+    shifts_for_date.select(:hour)
+  end
+
+  def number_of_blocks_on(date)
+  end
 end
