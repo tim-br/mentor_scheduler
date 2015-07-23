@@ -11,7 +11,7 @@ get '/calendar' do
 end
 
 post '/verify_login' do
-  @admin = Admin.find_by email: params[:admin_email]
+  @admin = Admin.find_by email: params[:email]
   if @admin && @admin.authenticate(params[:password])
     session[:user] = @admin
     redirect '/calendar'
