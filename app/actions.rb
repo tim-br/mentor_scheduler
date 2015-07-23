@@ -5,7 +5,20 @@ end
 get '/' do
   erb :'index'
 end
- /new' do
+
+get '/mentors' do
+  @mentors = Mentor.all
+  erb :'mentors/index'
+end
+
+post '/mentors' do
+  @full_name = params[:full_name]
+  @email = params[:email]
+  puts @full_name
+  puts @email
+end
+
+get '/mentors/new' do
   erb :'mentors/new'
 end
 
@@ -13,6 +26,8 @@ get '/shifts' do
   @shifts = Shift.all
   erb :'shifts/index'
 end
+
+
 
 get '/calendar' do
   erb :'/calendar/index'
