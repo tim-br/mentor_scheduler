@@ -5,18 +5,14 @@ end
 get '/' do
   erb :'index'
 end
-
-get '/mentors' do
-  @mentors = Mentor.all
-  erb :'mentors/index'
+ /new' do
+  erb :'mentors/new'
 end
 
 get '/shifts' do
   @shifts = Shift.all
   erb :'shifts/index'
 end
-
-
 
 get '/calendar' do
   erb :'/calendar/index'
