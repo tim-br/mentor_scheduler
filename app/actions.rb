@@ -6,6 +6,11 @@ get '/' do
   erb :'index'
 end
 
+get '/mentors' do
+  @mentors = Mentor.all
+  erb :'mentors/index'
+end
+
 get '/calendar' do
   erb :'/calendar/index'
 end
@@ -19,6 +24,11 @@ post '/verify_login' do
     redirect '/authentification_failed'
   end
 
+end
+
+get '/mentors/:id' do
+  @mentor = Mentor.find params[:id]
+  erb :'mentors/show'
 end
 
 get '/authentification_failed' do
