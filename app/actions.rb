@@ -14,20 +14,33 @@ end
 post '/mentors' do
   @full_name = params[:full_name]
   @email = params[:email]
-  puts @full_name
-  puts @email
+  @mentor =   Mentor.create(full_name: @full_name, email: @email)
+  redirect '/mentors'
 end
 
 get '/mentors/new' do
   erb :'mentors/new'
 end
 
+get '/mentors/:id' do
+  @mentor = Mentor.find params[:id]
+  erb :'mentors/show'
+end
+
+get '/mentors/:id/shifts' do
+  @mentor = Mentor.find params[:id]
+  erb :'mentors/show/shifts'
+end
+
+
 get '/shifts' do
   @shifts = Shift.all
   erb :'shifts/index'
 end
 
+post '/mentors/:id/shifts'
 
+end
 
 get '/calendar' do
   erb :'/calendar/index'
@@ -41,13 +54,8 @@ post '/verify_login' do
   else
     redirect '/authentification_failed'
   end
-
 end
 
-get '/mentors/:id' do
-  @mentor = Mentor.find params[:id]
-  erb :'mentors/show'
-end
 
 get '/authentification_failed' do
   erb :'/authentification_failed'
