@@ -1,0 +1,62 @@
+<form role="form" method="post" action="/shifts/mentors">
+  
+  <p>Choose Mentor:</p>
+  <select name="mentor">
+    <% Mentor.all.each do |mentor| %>
+      <option value = <%= mentor.full_name %> ><%= mentor.full_name %></option>
+    <% end %>   
+  </select>
+
+  <br><br>
+
+  <p>Choose Day:</p>
+  <select name="day">
+    <option value="1">Monday</option>
+    <option value="2">Tuesday</option>
+    <option value="3">Wednesday</option>
+    <option value="4">Thursday</option>
+    <option value="5">Friday</option>
+  </select>
+
+  <br><br>
+
+  <p>Start Time:</p>
+  <select name="day">
+    <option value="1">9am</option>
+    <option value="2">10am</option>
+    <option value="3">11am</option>
+    <option value="4">12pm</option>
+    <option value="5">1pm</option>
+    <option value="6">2pm</option>
+    <option value="7">3pm</option>
+    <option value="8">4pm</option>
+    <option value="9">5pm</option>
+    <option value="10">6pm</option>
+    <option value="11">7pm</option>
+    <option value="12">8pm</option>
+  </select>
+
+  <br><br>
+
+  <p>End Time:</p>
+  <select name="day">
+    <option value="2">10am</option>
+    <option value="3">11am</option>
+    <option value="4">12pm</option>
+    <option value="5">1pm</option>
+    <option value="6">2pm</option>
+    <option value="7">3pm</option>
+    <option value="8">4pm</option>
+    <option value="9">5pm</option>
+    <option value="10">6pm</option>
+    <option value="11">7pm</option>
+    <option value="12">8pm</option>
+    <option value="13">9pm</option>
+  </select>
+
+  <br><br>
+
+  <button type="submit" class="btn btn-default">Create Shift</button>
+
+  <br><br>
+</form>
