@@ -16,6 +16,7 @@ gem 'pg'
 gem 'rspec'
 gem 'database_cleaner'
 gem 'sqlite3'
+gem 'ruby_deep_clone'
 
 group :development, :test do
   gem 'pry'

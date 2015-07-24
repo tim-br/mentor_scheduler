@@ -10,6 +10,7 @@ require 'sinatra/contrib/all' # Requires cookies, among other things
 
 require 'bcrypt'
 require 'rspec'
+require 'deep_clone'
 
 require 'pry'
 
