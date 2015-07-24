@@ -38,10 +38,6 @@ get '/shifts' do
   erb :'shifts/index'
 end
 
-post '/mentors/:id/shifts' do
-
-  redirect '/mentors/:id/shifts'
-end
 
 get '/calendar' do
   erb :'/calendar/index'
@@ -57,7 +53,17 @@ post '/verify_login' do
   end
 end
 
+post '/mentor/shifts/new' do 
+  
+end
+
 
 get '/authentification_failed' do
   erb :'/authentification_failed'
 end
+
+
+# post '/mentors/:id/shifts' do
+
+#   redirect '/mentors/:id/shifts'
+# end
