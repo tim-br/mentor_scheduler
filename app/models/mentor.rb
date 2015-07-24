@@ -6,7 +6,7 @@ class Mentor < ActiveRecord::Base
 
   #returns active record relation
   def shifts_on(date)
-    Shift.where date: date
+    Shift.where(date: date).order("hour ASC")
     # a = []
     # s.each {|row| a<<row.date}
   end
