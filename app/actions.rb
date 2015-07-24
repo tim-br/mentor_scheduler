@@ -62,9 +62,13 @@ get '/mentors/:id/shifts/new' do
 end
 
 post '/mentor/shifts/new' do 
-  
+  @shifts = Shift.where(day: params[:day]).where(day: [params[:start_date]...params[:end_date]] )
+  @shifts.each do |shift|
+    shift.mentor = params[:mentor]
+    shift.save
+  end
+  redirect '/calendar'
 end
-
 
 get '/authentification_failed' do
   erb :'/authentification_failed'

@@ -3,7 +3,7 @@
   <p>Choose Mentor:</p>
   <select name="mentor">
     <% Mentor.all.each do |mentor| %>
-      <option value = <%= mentor.full_name %> ><%= mentor.full_name %></option>
+      <option value = "#{mentor}" > <%= mentor.full_name %> </option>
     <% end %>   
   </select>
 
@@ -21,7 +21,7 @@
   <br><br>
 
   <p>Start Time:</p>
-  <select name="day">
+  <select name="start_time">
     <option value="1">9am</option>
     <option value="2">10am</option>
     <option value="3">11am</option>
@@ -39,7 +39,7 @@
   <br><br>
 
   <p>End Time:</p>
-  <select name="day">
+  <select name="end_time">
     <option value="2">10am</option>
     <option value="3">11am</option>
     <option value="4">12pm</option>
