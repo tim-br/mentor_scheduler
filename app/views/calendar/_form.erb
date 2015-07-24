@@ -3,7 +3,7 @@
   <p>Choose Mentor:</p>
   <select name="mentor">
     <% Mentor.all.each do |mentor| %>
-      <option value = "#{mentor}" > <%= mentor.full_name %> </option>
+      <option value = "<%= mentor.id %>" > <%= mentor.full_name %> </option>
     <% end %>   
   </select>
 

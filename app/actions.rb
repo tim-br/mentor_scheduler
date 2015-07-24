@@ -62,9 +62,9 @@ get '/mentors/:id/shifts/new' do
 end
 
 post '/mentor/shifts/new' do 
-  @shifts = Shift.where(day: params[:day]).where(day: [params[:start_date]...params[:end_date]] )
+  @shifts = Shift.where(day: params[:day]).where(hour: [params[:start_time]...params[:end_time]] )
   @shifts.each do |shift|
-    shift.mentor = params[:mentor]
+    shift.mentor = Mentor.find(params[:mentor])
     shift.save
   end
   redirect '/calendar'
