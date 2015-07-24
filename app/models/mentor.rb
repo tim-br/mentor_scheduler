@@ -21,4 +21,9 @@ class Mentor < ActiveRecord::Base
 
   def number_of_blocks_on(date)
   end
+
+  def check_if_available?(shift)
+    !self.constraints.find_by_day_and_hour(shift.day, shift.hour)
+  end
+  
 end

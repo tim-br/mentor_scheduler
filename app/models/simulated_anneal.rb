@@ -15,4 +15,11 @@ class SimulatedAnneal
 
 end
 
-# s = Schedule.new
+
+s = Schedule.new
+#have to randomly assign shifts that 'work'
+# 4 mentors
+# constraint1 = mentor1, can only work after 5pm
+# constraint2 = mentor2, can only work 9-2
+# constraint3 = mentor3, cant work 12-3 and 6-9
+# constraint4 = mentor4, cant work Tuesday
