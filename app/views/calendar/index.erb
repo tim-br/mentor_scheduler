@@ -1,7 +1,7 @@
 <div class = "container" style="text-align: center;">
   <%= erb :'calendar/_form' %>
+  <% s = Schedule.new %>
   <table border = "1" style="width:100%">
-  <% @current_day = Date.today.day%>
     <tr>
       <th>Time</th>
       <th>Monday</th>
@@ -11,7 +11,7 @@
       <th>Friday</th>
     </tr>
     <tr>
-      <td>9am</td>
+      <td>9am - 10am</td>
       <td><%= Shift.find_by_day_and_hour(1, 1).mentor.full_name %></td>
       <td><%= Shift.find_by_day_and_hour(2, 1).mentor.full_name %></td>
       <td><%= Shift.find_by_day_and_hour(3, 1).mentor.full_name %></td>
@@ -20,7 +20,7 @@
     </tr>
     <tr>
     <tr>
-      <td>10am</td>
+      <td>10am - 11am</td>
       <td><%= Shift.find_by_day_and_hour(1, 2).mentor.full_name %></td>
       <td><%= Shift.find_by_day_and_hour(2, 2).mentor.full_name %></td>
       <td><%= Shift.find_by_day_and_hour(3, 2).mentor.full_name %></td>
@@ -29,7 +29,7 @@
     </tr>
     <tr>
     <tr>
-      <td>11am</td>
+      <td>11am - 12pm</td>
       <td><%= Shift.find_by_day_and_hour(1, 3).mentor.full_name %></td>
       <td><%= Shift.find_by_day_and_hour(2, 3).mentor.full_name %></td>
       <td><%= Shift.find_by_day_and_hour(3, 3).mentor.full_name %></td>
@@ -37,7 +37,7 @@
       <td><%= Shift.find_by_day_and_hour(5, 3).mentor.full_name %></td>
     </tr>
     <tr>
-      <td>12pm</td>
+      <td>12pm - 1pm</td>
       <td><%= Shift.find_by_day_and_hour(1, 4).mentor.full_name %></td>
       <td><%= Shift.find_by_day_and_hour(2, 4).mentor.full_name %></td>
       <td><%= Shift.find_by_day_and_hour(3, 4).mentor.full_name %></td>
@@ -45,7 +45,7 @@
       <td><%= Shift.find_by_day_and_hour(5, 4).mentor.full_name %></td>
     </tr>
     <tr>
-      <td>1pm</td>
+      <td>1pm - 2pm</td>
       <td><%= Shift.find_by_day_and_hour(1, 5).mentor.full_name %></td>
       <td><%= Shift.find_by_day_and_hour(2, 5).mentor.full_name %></td>
       <td><%= Shift.find_by_day_and_hour(3, 5).mentor.full_name %></td>
@@ -53,7 +53,7 @@
       <td><%= Shift.find_by_day_and_hour(5, 5).mentor.full_name %></td>
     </tr>
     <tr>
-      <td>2pm</td>
+      <td>2pm - 3pm</td>
       <td><%= Shift.find_by_day_and_hour(1, 6).mentor.full_name %></td>
       <td><%= Shift.find_by_day_and_hour(3, 6).mentor.full_name %></td>
       <td><%= Shift.find_by_day_and_hour(3, 6).mentor.full_name %></td>
@@ -61,7 +61,7 @@
       <td><%= Shift.find_by_day_and_hour(5, 6).mentor.full_name %></td>
     </tr>
     <tr>
-      <td>3pm</td>
+      <td>3pm - 4pm</td>
       <td><%= Shift.find_by_day_and_hour(1, 7).mentor.full_name %></td>
       <td><%= Shift.find_by_day_and_hour(2, 7).mentor.full_name %></td>
       <td><%= Shift.find_by_day_and_hour(3, 7).mentor.full_name %></td>
@@ -69,7 +69,7 @@
       <td><%= Shift.find_by_day_and_hour(5, 7).mentor.full_name %></td>
     </tr>
     <tr>
-      <td>4pm</td>
+      <td>4pm - 5pm</td>
       <td><%= Shift.find_by_day_and_hour(1, 8).mentor.full_name %></td>
       <td><%= Shift.find_by_day_and_hour(2, 8).mentor.full_name %></td>
       <td><%= Shift.find_by_day_and_hour(3, 8).mentor.full_name %></td>
@@ -77,7 +77,7 @@
       <td><%= Shift.find_by_day_and_hour(5, 8).mentor.full_name %></td>
     </tr>
     <tr>
-      <td>5pm</td>
+      <td>5pm - 6pm</td>
       <td><%= Shift.find_by_day_and_hour(1, 9).mentor.full_name %></td>
       <td><%= Shift.find_by_day_and_hour(2, 9).mentor.full_name %></td>
       <td><%= Shift.find_by_day_and_hour(3, 9).mentor.full_name %></td>
@@ -85,7 +85,7 @@
       <td><%= Shift.find_by_day_and_hour(5, 9).mentor.full_name %></td>
     </tr>
     <tr>
-      <td>6pm</td>
+      <td>6pm - 7pm</td>
       <td><%= Shift.find_by_day_and_hour(1, 10).mentor.full_name %></td>
       <td><%= Shift.find_by_day_and_hour(2, 10).mentor.full_name %></td>
       <td><%= Shift.find_by_day_and_hour(3, 10).mentor.full_name %></td>
@@ -93,7 +93,7 @@
       <td><%= Shift.find_by_day_and_hour(5, 10).mentor.full_name %></td>
     </tr>
     <tr>
-      <td>7pm</td>
+      <td>7pm - 8pm</td>
       <td><%= Shift.find_by_day_and_hour(1, 11).mentor.full_name %></td>
       <td><%= Shift.find_by_day_and_hour(2, 11).mentor.full_name %></td>
       <td><%= Shift.find_by_day_and_hour(3, 11).mentor.full_name %></td>
@@ -101,7 +101,7 @@
       <td><%= Shift.find_by_day_and_hour(5, 11).mentor.full_name %></td>
     </tr>
     <tr>
-      <td>8pm</td>
+      <td>8pm - 9pm</td>
       <td><%= Shift.find_by_day_and_hour(1, 12).mentor.full_name %></td>
       <td><%= Shift.find_by_day_and_hour(2, 12).mentor.full_name %></td>
       <td><%= Shift.find_by_day_and_hour(3, 12).mentor.full_name %></td>
@@ -110,5 +110,10 @@
     </tr>
 
   </table>
+
+  <% s.shift_gap_checker.each do |thing| %>
+   <%= thing %>
+   <br>
+  <% end %>
 
 </div>

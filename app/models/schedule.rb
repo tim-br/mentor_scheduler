@@ -10,16 +10,17 @@ class Schedule
     Shift.all.each do |shift|
       mentor_array_copy = mentor_array.dup
       begin
+        assigned = nil
         sample_mentor = mentor_array_copy.sample
         if sample_mentor.check_if_available?(shift)              
           shift.mentor = sample_mentor
           shift.save
           @shifts << shift
+          assigned = true
         else
           mentor_array_copy.delete(sample_mentor)
         end                
-      end while(shift.mentor.nil? && mentor_array_copy.length>0)
-      puts "no mentor found for shift #{shift.id}" if shift.mentor.nil?
+      end while(assigned.nil? && mentor_array_copy.length>0)
     end
   end
 
@@ -53,7 +54,6 @@ class Schedule
 
   def hours(arr)
     count = 0
-    arr << arr.last+1 if arr.length%2!=0
     previous_number = arr.first
     for i in (1..arr.length-1) do 
       count += (arr[i] - previous_number - 1)
@@ -63,15 +63,17 @@ class Schedule
   end
 
   def shift_gap_checker
+    array_1 = []
     Mentor.all.each do |mentor|
       mentor_shifts = self.shifts.select {|shift| shift.mentor == mentor}
-      mentor_shifts_days = (mentor_shifts.map &:day).uniq
+      mentor_shifts_days = (mentor_shifts.map &:day).uniq.sort
       mentor_shifts_days.each do |day| 
-        shifts_of_day = mentor_shifts.select {|shift| shift.day = day}
+        shifts_of_day = mentor_shifts.select {|shift| shift.day == day}
         shift_hours = hours((shifts_of_day.map &:hour).sort)
-        puts "On day #{day}, mentor #{mentor.full_name} has #{shift_hours} of gaps" 
+        array_1 << "On day #{day}, mentor #{mentor.full_name} has #{shift_hours} hours of gaps" 
       end
     end
+    return array_1
   end
 
 end
