@@ -1,6 +1,13 @@
 <div class = "container" style="text-align: center;">
   <%= erb :'calendar/_form' %>
   <% s = Schedule.new %>
+  The first schedule had a score of <%= s.score_calculator %>/100
+  <% sa = SimulatedAnneal.new(s) %>
+  <% sa.optimize(10,0.1) %>
+  <% s = sa.best_solution %>
+  The best schedule had a score of <%= s.score_calculator %>
+
+
   <table border = "1" style="width:100%">
     <tr>
       <th>Time</th>
@@ -108,12 +115,8 @@
       <td><%= Shift.find_by_day_and_hour(4, 12).mentor.full_name %></td>
       <td><%= Shift.find_by_day_and_hour(5, 12).mentor.full_name %></td>
     </tr>
-
   </table>
-
-  <% s.shift_gap_checker.each do |thing| %>
-   <%= thing %>
-   <br>
-  <% end %>
+  <%= s.score_calculator %>
+  <br>
 
 </div>
