@@ -27,6 +27,20 @@
   <title></title>
 </head>
 <body>
+  <header>
+    <div class="nav">
+      <ul>
+        <li><a href="/calendar">Calendar</a></li>
+        <li><a href="/mentors">Mentors</a></li>
+        <% if current_user %>
+          <li><a href="/account">Account</a></li>
+          <li><a href="/logout">Logout</a></li>
+        <% else %>
+          <li><a href="/">Login</a></li>
+        <% end %>
+      </ul>
+    </div>
+  </header>
   <%= yield %>
 </body>
 </html>

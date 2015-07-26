@@ -6,6 +6,11 @@ get '/' do
   erb :'index'
 end
 
+get '/logout' do 
+  session[:user] = nil
+  redirect '/'
+end
+
 get '/shifts' do
   @shifts = Shift.all
   erb :'shifts/index'

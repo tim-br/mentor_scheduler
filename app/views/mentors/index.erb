@@ -1,14 +1,10 @@
-<div class = "container" style="text-align: left;">
-  <% @mentors.each do |mentor| %>
-    <div class="mentor">
-      <p>
-        <a href="/mentors/<%= mentor.id %>"><%= mentor.full_name %></a>
-      </p>
+<% @mentors.each do |mentor| %>
+  <div id="team-members">
+    <div class="member">
+      <a href="#"><img src="images/<%=mentor.id%>_profile_photo.jpg"></a>
+      <div class="name">
+        <%= mentor.full_name %>
+      </div>
     </div>
-  <% end %>
-</div>
-
-<form action="/mentors/new">
-    <button class="btn" type="submit" value="Go to Google">Add a New Mentor</button>
-
-</form>
+  </div>
+<% end %>
