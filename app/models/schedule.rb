@@ -5,22 +5,55 @@ class Schedule
   attr_accessor :shifts, :score
 
   def initialize
+    Shift.update_all mentor_id: nil
     @shifts = []
     mentor_array = Mentor.all.to_a
-    Shift.all.each do |shift|
+    Shift.all.order(:id).each do |shift|
       mentor_array_copy = mentor_array.dup
       assigned = nil
+      count = 0
       begin
-        sample_mentor = mentor_array_copy.sample
-        if sample_mentor.check_if_available?(shift)              
-          shift.mentor = sample_mentor
-          shift.save
-          @shifts << shift
-          assigned = true
+        #first check if the previous mentor is available and has less than 2 shifts that day
+        if count == 0 && shift.id>1 && (shift.id+1)%12!=0
+          previous_mentor = Shift.find(shift.id-1).mentor 
+          count = 1
+          if previous_mentor && previous_mentor.total_hours_on_day(shift.day) == 1 && previous_mentor.check_if_available?(shift)
+            shift.mentor = previous_mentor
+            shift.save
+            @shifts << shift
+            assigned = true
+          else
+            mentor_array_copy.delete(previous_mentor)
+          end
         else
-          mentor_array_copy.delete(sample_mentor)
-        end                
-      end while(assigned.nil? && mentor_array_copy.length>0)
+          sample_mentor = mentor_array_copy.sample
+          if sample_mentor.check_if_available?(shift)
+            if sample_mentor.working_on_day?(shift.day)
+              hours_assigned =  sample_mentor.shifts.where(day: shift.day).map &:hour
+              if hours_assigned.include?(shift.hour-1) && hours_assigned.length <3
+                shift.mentor = sample_mentor
+                shift.save
+                @shifts << shift
+                assigned = true
+              else
+                mentor_array_copy.delete(sample_mentor)
+              end
+            else
+              shift.mentor = sample_mentor
+              shift.save
+              @shifts << shift
+              assigned = true
+            end
+          else
+            mentor_array_copy.delete(sample_mentor)
+          end              
+        end  
+      end while(mentor_array_copy.length>0 && assigned.nil?)
+      if assigned.nil?
+        shift.mentor = Mentor.find(6) 
+        shift.save
+        @shifts << shift
+      end
     end
   end
 
@@ -42,7 +75,7 @@ class Schedule
   end
 
   def valid?
-    self.shifts.select {|shift| shift.mentor_id == nil }.length == 0
+    self.shifts.select {|shift| shift.mentor_id == 6 }.length == 0
   end
 
   def hours(arr)
@@ -57,15 +90,8 @@ class Schedule
 
   def shift_gap_checker(mentor, day)
     shift_hours = 0
-    mentor_shifts = self.shifts.select {|shift| shift.mentor == mentor}
-    mentor_shift_days = mentor_shifts.select {|shift| shift.day == day}
-    # mentor_shifts_days = (mentor_shifts.map &:day).uniq.sort
-    # mentor_shifts_days.each do |day| 
-    #   shifts_of_day = mentor_shifts.select {|shift| shift.day == day}
-    # shift_hours += hours((shifts_of_day.map &:hour).sort)
-    shift_hours += hours((mentor_shift_days.map &:hour).sort)
-    # end
-    # return shift_hours
+    mentor_shifts = mentor.shifts.where(day: day)
+    shift_hours += hours((mentor_shifts.map &:hour).sort)
   end
 
 end

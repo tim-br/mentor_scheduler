@@ -2,11 +2,11 @@
   <%= erb :'calendar/_form' %>
   <% s = Schedule.new %>
   The first schedule had a score of <%= s.score_calculator %>/100
-  <% sa = SimulatedAnneal.new(s) %>
-  <% sa.optimize(10,0.1) %>
-  <% s = sa.best_solution %>
-  The best schedule had a score of <%= s.score_calculator %>
-
+  <% #sa = SimulatedAnneal.new(s) %>
+  <% #sa.optimize(10,0.1) %>
+  <% #s = sa.best_solution %>
+<!--   The best schedule had a score of <%= s.score_calculator %>
+ -->
 
   <table border = "1" style="width:100%">
     <tr>
