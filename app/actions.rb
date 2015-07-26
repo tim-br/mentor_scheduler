@@ -6,7 +6,14 @@ get '/' do
   erb :'index'
 end
 
-get '/logout' do 
+
+
+get '/account' do
+  @admin = session[:user]
+  erb :'admins/show'
+end
+
+get '/logout' do
   session[:user] = nil
   redirect '/'
 end
@@ -18,6 +25,22 @@ end
 
 get '/calendar' do
   erb :'/calendar/index'
+end
+
+post '/change_admin_password' do
+  @admin = session[:user]
+  if @admin.authenticate(params[:password])
+    @admin.update(password: params[:new_password], password_confirmation: params[:new_password_confirmation])
+    if @admin.valid?
+      @admin.save
+      redirect '/calendar'
+    else
+      @admin.reload
+      redirect '/account?passwords_dont_match=true'
+    end
+  else
+      redirect '/authentification_failed'
+  end
 end
 
 post '/verify_login' do
@@ -66,7 +89,7 @@ get '/mentors/:id/shifts/new' do
   erb :'/shifts/new'
 end
 
-post '/mentor/shifts/new' do 
+post '/mentor/shifts/new' do
   @shifts = Shift.where(day: params[:day]).where(hour: [params[:start_time]...params[:end_time]] )
   @shifts.each do |shift|
     shift.mentor = Mentor.find(params[:mentor])
@@ -78,5 +101,3 @@ end
 get '/authentification_failed' do
   erb :'/authentification_failed'
 end
-
-
