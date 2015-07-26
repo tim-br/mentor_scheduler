@@ -73,3 +73,18 @@ body {
       opacity: 0.4; }
     #team-members .member div.name {
       text-align: center; }
+
+.test #my_id {
+  color: #333333;
+  font-family: Impact, Charcoal, sans-serif;
+}
+
+.title_class{
+  margin-left:60px;
+  margin-top:30px;
+  color:#333333;
+  font-size:22px;
+}
+
+#list3 ul { list-style-image: url("/images/arrow.png"); color:#333333; font-size:18px; }
+#list3 ul li { line-height:30px; }

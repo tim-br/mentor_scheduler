@@ -4,7 +4,7 @@
              4 => "Thursday",
              5 => "Friday",
              6 => "Saturday",
-             7 => "Sunday"} 
+             7 => "Sunday"}
 
 HOURS_HASH = { 1 => "9 am",
                2 => "10 am",
@@ -17,26 +17,20 @@ HOURS_HASH = { 1 => "9 am",
                9 => "5 pm",
                10 => "6 pm",
                11 => "7 pm",
-               12 => "8 pm", 
+               12 => "8 pm",
                13 => "9 pm"} %>
 
-<h2 style="text-align: center;">
+<div class="test">
+  <h2 id="my_id"  ">
   Name: <%= @mentor.full_name %>
 </h2>
+</div>
 
 <img src="/images/<%=@mentor.id%>_profile_photo.jpg">
 
-<p>Constraints:</p>
-<% @mentor_days = (@mentor.constraints.map &:day).uniq.sort %>
+<div id="list3">
 
-<ul>
-<% @mentor_days.each do |day| %>
-<% @mentor_hours = (@mentor.constraints.where(day: day).map &:hour).sort %>
-  <li><%= DAYS_HASH[day] %>: <%= HOURS_HASH[@mentor_hours.first] %> to <%= HOURS_HASH[@mentor_hours.last+1] %></li>
-<% end %>
-</ul>
-
-<p>Shifts this week:</p>
+<p class="title_class">Shifts this week:</p>
 <% @mentor_days = (@mentor.shifts.map &:day).uniq.sort %>
 
 <ul>
@@ -46,5 +40,16 @@ HOURS_HASH = { 1 => "9 am",
 <% end %>
 </ul>
 
-<p><a href="/mentors">Back to All Mentors</a></p>
+<p class="title_class">Unavailable:</p>
+<% @mentor_days = (@mentor.constraints.map &:day).uniq.sort %>
+<ul>
+<% @mentor_days.each do |day| %>
+<% @mentor_hours = (@mentor.constraints.where(day: day).map &:hour).sort %>
+  <li><%= DAYS_HASH[day] %>: <%= HOURS_HASH[@mentor_hours.first] %> to <%= HOURS_HASH[@mentor_hours.last+1] %></li>
+<% end %>
+</ul>
 
+
+
+</div>
+<p><a href="/mentors">Back to All Mentors</a></p>
