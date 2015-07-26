@@ -1,0 +1,25 @@
+<% if params['passwords_dont_match']%>
+<%= "The new password and new password confirmation must match" %>
+<% end %>
+
+<div class="container">
+
+  <h2>
+    Admin: <%= @admin.full_name %>
+  </h2>
+
+  <form class="form-signin" action="/change_admin_password" method="post">
+    <h2 class="form-signin-heading">Change password</h2>
+    <label for="password" class="sr-only">Password</label>
+    <input type="password" id="password" class="form-control" name="password" placeholder="Password" required autofocus>
+
+    <p> New Password</p>
+    <label for="new_password" class="sr-only">New Password</label>
+    <input type="password" id="new_password" class="form-control" name="new_password" placeholder="New Password" required>
+    <label for="password_confirmation" class="sr-only">Confirm New Password</label>
+    <input type="password" id="password_confirmation" class="form-control" name="new_password_confirmation" placeholder="Confirm New Password" required>
+
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Change Password</button>
+  </form>
+
+</div>
