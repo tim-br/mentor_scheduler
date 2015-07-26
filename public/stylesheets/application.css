@@ -54,7 +54,6 @@ body {
  
 }
 
-
   #team-members .member {
     float: left;
     /*border: 1px solid gray;*/
@@ -62,12 +61,10 @@ body {
     margin: 10px;
     padding: 6px; }
     #team-members .member img {
-      width: 200px;
-      height: 200px;
+      width: 157px;
+      height: 157px;
       border-radius: 100px; }
     #team-members .member img:hover {
-      opacity: 0.4;
-      width: 200%;
-      height: 200%; }
+      opacity: 0.4; }
     #team-members .member div.name {
       text-align: center; }

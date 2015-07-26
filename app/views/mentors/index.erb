@@ -1,10 +1,20 @@
-<% @mentors.each do |mentor| %>
+<div class = "container">
+  <% @mentors.each do |mentor| %>
+    <div id="team-members">
+      <div class="member">
+        <a href="/mentors/<%=mentor.id%>"><img src="images/<%=mentor.id%>_profile_photo.jpg"></a>
+        <div class="name">
+          <%= mentor.full_name %>
+        </div>
+      </div>
+    </div>
+  <% end %>  
   <div id="team-members">
     <div class="member">
-      <a href="#"><img src="images/<%=mentor.id%>_profile_photo.jpg"></a>
+      <a href="/mentors/new"><img src="images/add_mentor.jpg"></a>
       <div class="name">
-        <%= mentor.full_name %>
+        Add Mentor
       </div>
     </div>
   </div>
-<% end %>
+</div>
