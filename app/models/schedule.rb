@@ -12,43 +12,55 @@ class Schedule
       mentor_array_copy = mentor_array.dup
       assigned = nil
       count = 0
-      begin
-        #first check if the previous mentor is available and has less than 2 shifts that day
-        if count == 0 && shift.id>1 && (shift.id+1)%12!=0
-          previous_mentor = Shift.find(shift.id-1).mentor 
-          count = 1
-          if previous_mentor && previous_mentor.total_hours_on_day(shift.day) == 1 && previous_mentor.check_if_available?(shift)
-            shift.mentor = previous_mentor
-            shift.save
-            @shifts << shift
-            assigned = true
+      #if this is the last shift of the day, it must be assingned the previous mentor
+      #if that mentor is not available, shift is empty
+      if (shift.id)%12==0
+        previous_mentor = Shift.find(shift.id-1).mentor
+        if previous_mentor.check_if_available?(shift) && previous_mentor.total_hours_on_day(shift.day) <3
+          shift.mentor = previous_mentor
+          shift.save
+          @shifts << shift
+          assigned = true
+        end     
+      else
+        begin
+          #check once if the previous mentor is available and has less than 2 shifts that day
+          if count == 0 && shift.id>1
+            previous_mentor = Shift.find(shift.id-1).mentor 
+            count = 1
+            if previous_mentor && previous_mentor.total_hours_on_day(shift.day) == 1 && previous_mentor.check_if_available?(shift)
+              shift.mentor = previous_mentor
+              shift.save
+              @shifts << shift
+              assigned = true
+            else
+              mentor_array_copy.delete(previous_mentor)
+            end
           else
-            mentor_array_copy.delete(previous_mentor)
-          end
-        else
-          sample_mentor = mentor_array_copy.sample
-          if sample_mentor.check_if_available?(shift)
-            if sample_mentor.working_on_day?(shift.day)
-              hours_assigned =  sample_mentor.shifts.where(day: shift.day).map &:hour
-              if hours_assigned.include?(shift.hour-1) && hours_assigned.length <3
+            sample_mentor = mentor_array_copy.sample
+            if sample_mentor.check_if_available?(shift)
+              if sample_mentor.working_on_day?(shift.day)
+                hours_assigned =  sample_mentor.shifts.where(day: shift.day).map &:hour
+                if hours_assigned.include?(shift.hour-1) && hours_assigned.length <3
+                  shift.mentor = sample_mentor
+                  shift.save
+                  @shifts << shift
+                  assigned = true
+                else
+                  mentor_array_copy.delete(sample_mentor)
+                end
+              else
                 shift.mentor = sample_mentor
                 shift.save
                 @shifts << shift
                 assigned = true
-              else
-                mentor_array_copy.delete(sample_mentor)
               end
             else
-              shift.mentor = sample_mentor
-              shift.save
-              @shifts << shift
-              assigned = true
-            end
-          else
-            mentor_array_copy.delete(sample_mentor)
-          end              
-        end  
-      end while(mentor_array_copy.length>0 && assigned.nil?)
+              mentor_array_copy.delete(sample_mentor)
+            end              
+          end  
+        end while(mentor_array_copy.length>0 && assigned.nil?)
+      end
       if assigned.nil?
         shift.mentor = Mentor.find(6) 
         shift.save

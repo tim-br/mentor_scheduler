@@ -1,5 +1,5 @@
+<%= erb :'calendar/_form' %>
 <div class = "container" style="text-align: center;">
-  <%= erb :'calendar/_form' %>
   <% s = Schedule.new %>
   The first schedule had a score of <%= s.score_calculator %>/100
   <% #sa = SimulatedAnneal.new(s) %>
