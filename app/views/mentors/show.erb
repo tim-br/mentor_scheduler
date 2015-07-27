@@ -19,16 +19,17 @@ HOURS_HASH = { 1 => "9 am",
                11 => "7 pm",
                12 => "8 pm",
                13 => "9 pm"} %>
-
-<div class="test">
-  <h2 id="my_id"  ">
-  Name: <%= @mentor.full_name %>
-</h2>
+<div class="container">
+   <div class="row row-centered">
+<div class="col-sm-6 center-block" >
+  <img src="/images/<%=@mentor.id%>_profile_photo.jpg">
+  <h2 id="my_id">
+    <%= @mentor.full_name %>
+  </h2>
 </div>
 
-<img src="/images/<%=@mentor.id%>_profile_photo.jpg">
-
-<div id="list3">
+<div class="col-sm-6 center-block"  >
+<div id="list3" >
 
 <p class="title_class">Shifts this week:</p>
 <% @mentor_days = (@mentor.shifts.map &:day).uniq.sort %>
@@ -49,7 +50,10 @@ HOURS_HASH = { 1 => "9 am",
 <% end %>
 </ul>
 
-
-
 </div>
-<p><a href="/mentors">Back to All Mentors</a></p>
+</div>
+</div>
+</div>
+<button class="btn btn-default">
+<a href="/mentors">Back to All Mentors</a>
+</button>

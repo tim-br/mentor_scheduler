@@ -7,8 +7,12 @@ get '/' do
 end
 
 get '/account' do
-  @admin = session[:user]
-  erb :'admins/show'
+  if current_user
+    @admin = session[:user]
+    erb :'admins/show'
+  else
+    redirect '/permission_denied'
+  end
 end
 
 get '/logout' do
@@ -17,13 +21,21 @@ get '/logout' do
 end
 
 get '/shifts' do
-  @shifts = Shift.all
-  erb :'shifts/index'
+  if current_user
+    @shifts = Shift.all
+    erb :'shifts/index'
+  else
+    redirect '/permission_denied'
+  end
 end
 
 get '/calendar' do
-  @schedule = Schedule.new
-  erb :'/calendar/index'
+  if current_user
+    @schedule = Schedule.new
+    erb :'/calendar/index'
+  else
+    redirect '/permission_denied'
+  end
 end
 
 post '/change_admin_password' do
@@ -53,8 +65,12 @@ post '/verify_login' do
 end
 
 get '/mentors' do
-  @mentors = Mentor.all
-  erb :'mentors/index'
+  if current_user
+    @mentors = Mentor.all
+    erb :'mentors/index'
+  else
+    redirect '/authentification_failed'
+  end
 end
 
 post '/mentors' do
@@ -71,8 +87,12 @@ get '/mentors/new' do
 end
 
 get '/mentors/:id' do
-  @mentor = Mentor.find params[:id]
-  erb :'mentors/show'
+  if current_user
+    @mentor = Mentor.find params[:id]
+    erb :'mentors/show'
+  else
+    redirect '/permission_denied'
+  end
 end
 
 post '/calendar' do 
@@ -98,4 +118,8 @@ end
 
 get '/authentification_failed' do
   erb :'/authentification_failed'
+end
+
+get '/permission_denied' do
+  "PERMISSION DENIED"
 end
