@@ -4,7 +4,7 @@
     <div class="panel panel-info">
       <div class="panel-heading">Add a new Mentor</div>
       <div class="panel-body">
-  <form role="form" method="post" action="/mentors">
+  <form role="form" method="post" action="/mentors/new">
 
     <div class="form-group">
       <label class="control-label">Full Name</label>
@@ -18,21 +18,50 @@
     </div>
 
     <div class="form-group">
-      <label class="control-label">Photo</label>
-      <input type="file" name="mentor[photo]" class="form-control">
-    </div>
-
-    <div class="form-group">
-      <label class="control-label">Constraints:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Start&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;End</label>
+      <label class="control-label">Constraints: Start Time End Time</label>
       <ul>
-        <li>Monday &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= erb :'mentors/_start_time' %> <%= erb :'mentors/_end_time' %></li>
-        <li>Tuesday &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= erb :'mentors/_start_time' %> <%= erb :'mentors/_end_time' %></li>
-        <li>Wednesday &nbsp;&nbsp;<%= erb :'mentors/_start_time' %> <%= erb :'mentors/_end_time' %></li>
-        <li>Thursday &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= erb :'mentors/_start_time' %> <%= erb :'mentors/_end_time' %></li>
-        <li>Friday &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <%= erb :'mentors/_start_time' %> <%= erb :'mentors/_end_time' %></li>
+        <li>Monday
+          <select name="monday_start_time">
+            <%= erb :'mentors/_start_time' %>
+          </select>
+          <select name="monday_end_time">
+            <%= erb :'mentors/_end_time' %>
+          </select>
+        </li>
+        <li>Tuesday
+          <select name="tuesday_start_time">
+            <%= erb :'mentors/_start_time' %>
+          </select>
+          <select name="tuesday_end_time">
+            <%= erb :'mentors/_end_time' %>
+          </select>
+        </li>
+        <li>Wednesday
+          <select name="wednesday_start_time">
+            <%= erb :'mentors/_start_time' %>
+          </select>
+          <select name="wednesday_end_time">
+            <%= erb :'mentors/_end_time' %>
+          </select>
+        </li>
+        <li>Thursday
+          <select name="thursday_start_time">
+            <%= erb :'mentors/_start_time' %>
+          </select>
+          <select name="thursday_end_time">
+            <%= erb :'mentors/_end_time' %>
+          </select>
+        </li>
+        <li>Friday
+          <select name="friday_start_time">
+            <%= erb :'mentors/_start_time' %>
+          </select>
+          <select name="friday_end_time">
+            <%= erb :'mentors/_end_time' %>
+          </select>
+        </li>
       </ul>
     </div>
-
     <button type="submit" class="btn btn-default">Create Mentor</button>
   </form>
 </div>

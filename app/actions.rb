@@ -86,6 +86,41 @@ get '/mentors/new' do
   erb :'mentors/new'
 end
 
+post '/mentors/new' do 
+  @mentor = Mentor.new(params[:mentor])
+  if @mentor.save
+    if params[:monday_start_time] != 0
+      for i in (params[:monday_start_time]...params[:monday_end_time])
+        @constraint_monday = Constraint.create(mentor_id: @mentor.id, day: 1, hour: i)
+        @constraint_monday.save
+      end
+    elsif params[:tuesday_start_time] != 0
+      for i in (params[:tuesday_start_time]...params[:tuesday_end_time])
+        @constraint_tuesday = Constraint.create(mentor_id: @mentor.id, day: 2, hour: i)
+        @constraint_tuesday.save
+      end
+    elsif params[:wednesday_start_time] != 0
+      for i in (params[:wednesday_start_time]...params[:wednesday_end_time])
+        @constraint_wednesday = Constraint.create(mentor_id: @mentor.id, day: 3, hour: i)
+        @constraint_wednesday.save
+      end
+    elsif params[:thursday_start_time] != 0
+      for i in (params[:thursday_start_time]...params[:thursday_end_time])
+        @constraint_thursday = Constraint.create(mentor_id: @mentor.id, day: 4, hour: i)
+        @constraint_thursday.save
+      end
+    elsif params[:friday_start_time] != 0
+      for i in (params[:friday_start_time]...params[:friday_end_time])
+        @constraint_friday = Constraint.create(mentor_id: @mentor.id, day: 5, hour: i)
+        @constraint_friday.save
+      end
+    end
+    # File.open('images/' + params['photo'][:filename], "w") do |f|
+    #   f.write(params['photo'][:tempfile].read)
+    # end
+  end
+end
+
 get '/mentors/:id' do
   if current_user
     @mentor = Mentor.find params[:id]
@@ -103,18 +138,9 @@ post '/optimize' do
   @schedule = Schedule.new
   @sa = SimulatedAnneal.new(@schedule)
   @sa.optimize(10, 0.1)
-  # @schedule = @sa.best_solution
+  @schedule = @sa.best_solution
   erb :'/calendar/index'
 end
-
-# post '/mentor/shifts/new' do
-#   @shifts = Shift.where(day: params[:day]).where(hour: [params[:start_time]...params[:end_time]] )
-#   @shifts.each do |shift|
-#     shift.mentor = Mentor.find(params[:mentor])
-#     shift.save
-#   end
-#   redirect '/calendar'
-# end
 
 get '/authentification_failed' do
   erb :'/authentification_failed'
