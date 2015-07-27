@@ -94,22 +94,26 @@ post '/mentors/new' do
         @constraint_monday = Constraint.create(mentor_id: @mentor.id, day: 1, hour: i)
         @constraint_monday.save
       end
-    elsif params[:tuesday_start_time] != 0
+    end
+    if params[:tuesday_start_time] != 0
       for i in (params[:tuesday_start_time]...params[:tuesday_end_time])
         @constraint_tuesday = Constraint.create(mentor_id: @mentor.id, day: 2, hour: i)
         @constraint_tuesday.save
       end
-    elsif params[:wednesday_start_time] != 0
+    end
+    if params[:wednesday_start_time] != 0
       for i in (params[:wednesday_start_time]...params[:wednesday_end_time])
         @constraint_wednesday = Constraint.create(mentor_id: @mentor.id, day: 3, hour: i)
         @constraint_wednesday.save
       end
-    elsif params[:thursday_start_time] != 0
+    end
+    if params[:thursday_start_time] != 0
       for i in (params[:thursday_start_time]...params[:thursday_end_time])
         @constraint_thursday = Constraint.create(mentor_id: @mentor.id, day: 4, hour: i)
         @constraint_thursday.save
       end
-    elsif params[:friday_start_time] != 0
+    end
+    if params[:friday_start_time] != 0
       for i in (params[:friday_start_time]...params[:friday_end_time])
         @constraint_friday = Constraint.create(mentor_id: @mentor.id, day: 5, hour: i)
         @constraint_friday.save
@@ -119,6 +123,7 @@ post '/mentors/new' do
     #   f.write(params['photo'][:tempfile].read)
     # end
   end
+  redirect '/mentors'
 end
 
 get '/mentors/:id' do
@@ -137,7 +142,7 @@ end
 post '/optimize' do 
   @schedule = Schedule.new
   @sa = SimulatedAnneal.new(@schedule)
-  @sa.optimize(10, 0.1)
+  @sa.optimize(10, 0.5)
   @schedule = @sa.best_solution
   erb :'/calendar/index'
 end

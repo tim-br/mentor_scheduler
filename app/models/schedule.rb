@@ -10,6 +10,7 @@ class Schedule
     mentor_array = Mentor.all.to_a
     Shift.all.order(:id).each do |shift|
       mentor_array_copy = mentor_array.dup
+      mentor_array_copy.delete(Mentor.find(6))
       assigned = nil
       count = 0
       #if this is the last shift of the day, it must be assingned the previous mentor
@@ -25,7 +26,7 @@ class Schedule
       else
         begin
           #check once if the previous mentor is available and has less than 2 shifts that day
-          if count == 0 && shift.id>1
+          if count == 0 && shift.id>1 && shift.id%12!=1
             previous_mentor = Shift.find(shift.id-1).mentor 
             count = 1
             if previous_mentor && previous_mentor.total_hours_on_day(shift.day) == 1 && previous_mentor.check_if_available?(shift)
@@ -40,7 +41,7 @@ class Schedule
             sample_mentor = mentor_array_copy.sample
             if sample_mentor.check_if_available?(shift)
               if sample_mentor.working_on_day?(shift.day)
-                hours_assigned =  sample_mentor.shifts.where(day: shift.day).map &:hour
+                hours_assigned = sample_mentor.shifts.where(day: shift.day).map &:hour
                 if hours_assigned.include?(shift.hour-1) && hours_assigned.length <3
                   shift.mentor = sample_mentor
                   shift.save
@@ -77,8 +78,10 @@ class Schedule
     end
     #has every TA been assigned a shift?
     Mentor.all.each do |mentor|
-      if Shifts.where(mentor_id: mentor.id).count == 0
-        self.score -= 1
+      if mentor.id !=6
+        if Shift.where(mentor_id: mentor.id).count == 0
+          self.score -= 1
+        end
       end
     end
     #does a TA have gaps in their shifts on the same day?

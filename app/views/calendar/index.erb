@@ -1,6 +1,11 @@
 
 <div class = "container" style="text-align: center; margin-top: 100px;">
 
+  <form role="form" method="post" action="/calendar" style="display: inline-block;">
+    <button type="submit" class="btn btn-default">New schedule</button>
+  </form>
+  <br>
+  <br>
   <table border = "1" style="width:100%">
     <tr>
       <th>Time</th>
@@ -112,11 +117,18 @@
   <br>
   Score: <%= @schedule.score_calculator %>
   <br>
-  <form role="form" method="post" action="/calendar" style="display: inline-block; margin-left: 30%">
-    <button type="submit" class="btn btn-default">New schedule</button>
-  </form>
-  <form role="form" method="post" action="/optimize" style="display: inline-block; margin-right: 30%">
+
+  
+  <ul>
+    <% Mentor.all.each do |mentor| %>
+      <% if mentor.id != 6 %>
+        Mentor <%= mentor.full_name %> is scheduled for a total of <%= mentor.shifts.count %> hours
+        <br>
+      <% end %>
+    <% end %>
+  </ul>
+<!--   <form role="form" method="post" action="/optimize" style="display: inline-block; margin-right: 30%">
     <button type="submit" class="btn btn-default" style="margin-right: 30%">Optimize</button>
   </form>
-
+ -->
 </div>

@@ -1,5 +1,6 @@
 <div class = "container">
   <% @mentors.each do |mentor| %>
+  <% if mentor.id != 6 %>
     <div id="team-members">
       <div class="member">
         <a href="/mentors/<%=mentor.id%>"><img src="images/<%=mentor.id%>_profile_photo.jpg"></a>
@@ -8,6 +9,7 @@
         </div>
       </div>
     </div>
+      <% end %>
   <% end %>  
   <div id="team-members">
     <div class="member">
@@ -17,4 +19,5 @@
       </div>
     </div>
   </div>
+
 </div>
