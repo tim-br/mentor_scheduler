@@ -5,13 +5,13 @@ class SimulatedAnneal
   attr_accessor :current_solution, :best_solution, :new_solution
 
   def initialize(first_solution)
-    @current_solution = DeepClone.clone first_solution
-    @best_solution = DeepClone.clone first_solution
+    @current_solution = first_solution.dup
+    @best_solution = first_solution.dup
   end
 
   def optimize(temp, cooling_rate)
     while(temp>0.1)
-      self.new_solution = DeepClone.clone self.current_solution
+      self.new_solution = self.current_solution.dup
       # temp = 10
       # cooling_rate = 0.03
       #switch two random TA assignments, not caring about constraints
@@ -26,9 +26,9 @@ class SimulatedAnneal
       new_energy = self.new_solution.score_calculator
 
       if new_energy > energy
-        self.best_solution = DeepClone.clone self.new_solution
+        self.best_solution = self.new_solution.dup
       elsif acceptance_probability(energy, new_energy, temp) > rand
-        self.current_solution = DeepClone.clone self.new_solution
+        self.current_solution = self.new_solution.dup
       end
       temp *= (1-cooling_rate)
     end

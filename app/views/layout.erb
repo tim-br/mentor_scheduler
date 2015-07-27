@@ -30,9 +30,9 @@
   <header>
     <div class="nav">
       <ul>
-        <li><a href="/calendar">Calendar</a></li>
-        <li><a href="/mentors">Mentors</a></li>
-        <% if current_user %>
+        <% if session[:user] %>
+          <li><a href="/calendar">Calendar</a></li>
+          <li><a href="/mentors">Mentors</a></li>
           <li><a href="/account">Account</a></li>
           <li><a href="/logout">Logout</a></li>
         <% else %>

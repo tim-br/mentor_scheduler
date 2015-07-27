@@ -1,9 +1,0 @@
-<div class = "container" style="text-align: left;">
-  <% @mentors.each do |mentor| %>
-    <div class="mentor">
-      <p>
-        <a href="/mentors/<%= mentor.id %>"><%= mentor.full_name %></a>
-      </p>
-    </div>
-  <% end %>
-</div>

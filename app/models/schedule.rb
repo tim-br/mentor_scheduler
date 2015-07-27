@@ -76,10 +76,24 @@ class Schedule
       return 0
     end
     #has every TA been assigned a shift?
+    Mentor.all.each do |mentor|
+      if Shifts.where(mentor_id: mentor.id).count == 0
+        self.score -= 1
+      end
+    end
     #does a TA have gaps in their shifts on the same day?
     for i in (1..5) do 
       Mentor.all.each do |mentor| 
         self.score-=shift_gap_checker(mentor, i)
+      end
+    end
+    #does a TA have a shift of 1 hour?
+    Mentor.all.each do |mentor|
+      mentor_days = (mentor.shifts.map &:day).uniq.sort
+      mentor_days.each do |day|
+        if mentor.shifts.where(day: day).count == 1
+          self.score -= 1
+        end
       end
     end
     return self.score
@@ -87,7 +101,7 @@ class Schedule
   end
 
   def valid?
-    self.shifts.select {|shift| shift.mentor_id == 6 }.length == 0
+    (self.shifts.select {|shift| shift.mentor_id == 6 }).length == 0
   end
 
   def hours(arr)
